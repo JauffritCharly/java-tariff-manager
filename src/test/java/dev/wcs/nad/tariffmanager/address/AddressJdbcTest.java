@@ -20,10 +20,23 @@ public class AddressJdbcTest {
 
     @Test
     public void shouldLoadAddressWithId2() {
-        Optional<Address> firstAddress = addressLegacyDao.getByIdJava7Syntax(1);
+        Optional<Address> firstAddress = addressLegacyDao.getByIdJava7Syntax(2);
         assertThat(firstAddress.isEmpty()).isFalse();
-        assertThat(firstAddress.get().getId().toString().equals("1")).isTrue();
+        assertThat(firstAddress.get().getId().toString().equals("2")).isTrue();
     }
 
+    @Test
+    public void shouldLoadAddressWithId7() {
+        Optional<Address> sevenAddress = addressLegacyDao.getByIdJava7Syntax(7);
+        assertThat(sevenAddress.isEmpty()).isFalse();
+        assertThat(sevenAddress.get().getId().toString().equals("7")).isTrue();
+    }
+
+    @Test
+    public void shouldReturnEmptyIfAddressNotFound() {
+        Optional<Address> sevenAddress = addressLegacyDao.getByIdJava7Syntax(49);
+        assertThat(sevenAddress.isEmpty()).isTrue();
+       
+    }
 
 }
