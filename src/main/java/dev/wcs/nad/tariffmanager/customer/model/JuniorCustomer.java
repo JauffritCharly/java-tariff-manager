@@ -15,5 +15,4 @@ public class JuniorCustomer extends StandardCustomer {
     public double calculateDiscountedPrice(int value) {
         return value - (value * (discountPercentage / 100));
     }
-
 }
