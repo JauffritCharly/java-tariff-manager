@@ -28,5 +28,4 @@ public class Contact {
         this.getAddresses().add(address);
         address.setContact(this);
     }
-
 }
