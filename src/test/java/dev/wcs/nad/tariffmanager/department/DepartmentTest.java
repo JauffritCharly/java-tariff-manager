@@ -3,7 +3,6 @@ package dev.wcs.nad.tariffmanager.department;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.cdi.JpaRepositoryExtension;
 
 import dev.wcs.nad.tariffmanager.persistence.entity.Department;
 import dev.wcs.nad.tariffmanager.persistence.entity.Tariff;
@@ -12,7 +11,7 @@ import dev.wcs.nad.tariffmanager.persistence.entity.Tariff;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-public class DepartmentTest extends JpaRepository<> {
+public class DepartmentTest  {
 
     @Test
     public void tariffTest(){
