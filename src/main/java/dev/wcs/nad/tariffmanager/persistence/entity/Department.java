@@ -25,7 +25,7 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department", orphanRemoval = true)
-    private Set<Tariff> tariffs = new LinkedHashSet<>();
+    private List<Tariff> tariffs = new ArrayList<>();
 
     public void addTariff(Tariff tariff) {
         this.getTariffs().add(tariff);
