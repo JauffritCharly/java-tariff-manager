@@ -21,9 +21,11 @@ public class CustomerService {
     private final AddressRepository addressRepository;
     private final ContactRepository contactRepository;
     // Challenge: Make legalAge configurable
-    private final int legalAge = 18;
+    // private final int legalAge = 18;
+    private int maturityAge;
 
-    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository, ContactRepository contactRepository) {
+    public CustomerService(@Value ("${maturity.age}")int maturityAge, CustomerRepository customerRepository, AddressRepository addressRepository, ContactRepository contactRepository) {
+        this.maturityAge = maturityAge;
         this.customerRepository = customerRepository;
         this.addressRepository = addressRepository;
         this.contactRepository = contactRepository;
@@ -61,16 +63,17 @@ public class CustomerService {
 
     // Examine the Repository to see if there are methods defined which can be used here.
     public Iterable<Customer> filterOfLegalAgeCustomersInRepository() {
-        return null;
+
+        return customerRepository.findAllByBirthdateIsBefore(LocalDate.now().minusYears(maturityAge));
     }
 
     // Examine the Repository to see if there are methods defined which can be used here.
     public Iterable<Customer> filterOfLegalAgeAndLastname(String lastname) {
-        return null;
+        return customerRepository.findAllByBirthdateIsBeforeAndLastnameContainingIgnoreCase(LocalDate.now().minusYears(maturityAge), lastname);
     }
 
     private boolean isOfLegalAge(Customer customers) {
-        return customers.getBirthdate().isBefore(LocalDate.now().minusYears(legalAge));
+        return customers.getBirthdate().isBefore(LocalDate.now().minusYears(maturityAge));
     }
 
     //Make sure that a parameter searchFilter can be passed as a QueryParam to further filter the stream for all customers aged >= 18 and name startsWith searchFilter.
